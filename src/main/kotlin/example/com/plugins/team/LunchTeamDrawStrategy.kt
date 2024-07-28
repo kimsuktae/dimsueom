@@ -13,14 +13,22 @@ abstract class LunchTeamDrawStrategy {
         partySize: Int = 4,
     ): LunchTeam
 
-    class Random : LunchTeamDrawStrategy() {
+    class KangGunWoo : LunchTeamDrawStrategy() {
         override fun draw(
             participants: List<Participant>,
             randomLunchPartyListHistory: List<LunchTeamHistory>?,
             date: LocalDate,
             partySize: Int
         ): LunchTeam {
-            TODO("Not yet implemented")
+            val teams = participants
+                .shuffled()
+                .chunked((participants.size + partySize - 1) / partySize)
+                .map { it.toList() }
+
+            return LunchTeam(
+                teams = teams,
+                date = date,
+            )
         }
     }
 
@@ -85,7 +93,7 @@ abstract class LunchTeamDrawStrategy {
             )
         }
 
-        fun List<LunchTeamHistory>.getMemberToMemberCountMap(): MutableMap<String, MutableMap<String, Long>> {
+        private fun List<LunchTeamHistory>.getMemberToMemberCountMap(): MutableMap<String, MutableMap<String, Long>> {
             val memberToMemberCountMap = mutableMapOf<String, MutableMap<String, Long>>()
             this.flatten().forEach { party ->
                 party.forEach { member ->
@@ -102,7 +110,7 @@ abstract class LunchTeamDrawStrategy {
     }
 
     companion object {
-        val Random = Random()
+        val KangGunWoo = KangGunWoo()
         val HistoryAwareRandomDrawStrategy = HistoryAwareRandomLunchTeamDrawStrategy()
     }
 }

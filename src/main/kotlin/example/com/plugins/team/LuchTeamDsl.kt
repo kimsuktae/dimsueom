@@ -15,7 +15,7 @@ class LuchTeamDsl {
     private var date: LocalDate = LocalDate.now()
     private var lunchTeamHistories: List<List<List<String>>> = mutableListOf()
     private var partySize: Int = 4
-    private var lunchTeamDrawStrategy: LunchTeamDrawStrategy = LunchTeamDrawStrategy.Random
+    private var lunchTeamDrawStrategy: LunchTeamDrawStrategy = LunchTeamDrawStrategy.KangGunWoo
 
     init {
         require(partySize >= 2) { "Party Size must be at least 2!" }
@@ -65,7 +65,7 @@ class ParticipantsSelectionDsl {
 
 
 class DrawStrategyDsl {
-    private var strategy: LunchTeamDrawStrategy = LunchTeamDrawStrategy.Random
+    private var strategy: LunchTeamDrawStrategy = LunchTeamDrawStrategy.KangGunWoo
 
     fun strategy(strategy: LunchTeamDrawStrategy) {
         this.strategy = strategy

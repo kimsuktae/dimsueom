@@ -78,11 +78,6 @@ fun Application.configureRouting(
                 }
             }.build()
 
-            println("======")
-            println("======")
-            println(lunchTeam.teams)
-            println("======")
-            println("======")
             call.respondHtml {
                 body {
                     teamList(lunchTeam.teams)
