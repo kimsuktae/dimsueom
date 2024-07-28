@@ -35,36 +35,28 @@ fun HTML.lunch() = layout {
             p(classes = "htmx-indicator") { +"Loading..." }
         }
     }
+    h2 { +"Lunch Team" }
 
     div {
-        h2 { +"Lunch Team" }
-
-        ul {
-            id = "team-list"
-
-            attributes["hx-get"] = "/team"
-            attributes["hx-trigger"] = "load,sse:teamUpdated"
-
-            p(classes = "htmx-indicator") { +"Loading..." }
-        }
+        id = "team-list-container"  // 변경된 부분
+        attributes["hx-get"] = "/team"
+        attributes["hx-trigger"] = "load,sse:teamUpdated"
+        p(classes = "htmx-indicator") { +"Loading..." }
     }
 }
 
 fun BODY.teamList(teams: List<Team>) {
-    ul {
-        id = "team-list"
-
+    div {
+        id = "team-list-container"
         attributes["hx-get"] = "/team"
         attributes["hx-trigger"] = "sse:teamUpdated"
 
-        teams.forEachIndexed { index, team ->
-            div {
-                h3 { +"Team ${index + 1}" }
+        teams.forEach { team ->
+            div("team-card") {
+                h3 { +"팀 ${team.first().name}" }
                 ul {
                     team.forEach { participant ->
-                        li {
-                            +participant.name
-                        }
+                        li { +participant.name }
                     }
                 }
             }
