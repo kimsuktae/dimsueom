@@ -1,9 +1,9 @@
 package example.com
 
 import example.com.plugins.*
+import example.com.plugins.history.HistoryService
 import example.com.plugins.member.MemberService
 import example.com.plugins.sse.configureSse
-import example.com.plugins.team.TeamService
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.server.application.*
@@ -15,8 +15,8 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     val memberService = MemberService()
-    val teamService = TeamService(memberService)
-    configureRouting(memberService, teamService)
+    val historyService = HistoryService()
+    configureRouting(memberService, historyService)
     configureSse()
     configureCors()
 }

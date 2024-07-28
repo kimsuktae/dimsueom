@@ -1,7 +1,7 @@
 package example.com.views.lunch
 
 import example.com.plugins.member.Member
-import example.com.plugins.team.Participant
+import example.com.plugins.team.Team
 import example.com.views.layout.layout
 import java.util.UUID
 import kotlinx.html.BODY
@@ -11,6 +11,7 @@ import kotlinx.html.button
 import kotlinx.html.div
 import kotlinx.html.h1
 import kotlinx.html.h2
+import kotlinx.html.h3
 import kotlinx.html.id
 import kotlinx.html.li
 import kotlinx.html.p
@@ -49,16 +50,23 @@ fun HTML.lunch() = layout {
     }
 }
 
-fun BODY.teamList(team: List<Participant>) {
+fun BODY.teamList(teams: List<Team>) {
     ul {
         id = "team-list"
 
         attributes["hx-get"] = "/team"
         attributes["hx-trigger"] = "sse:teamUpdated"
 
-        team.forEach { member ->
-            li {
-                +member.name
+        teams.forEachIndexed { index, team ->
+            div {
+                h3 { +"Team ${index + 1}" }
+                ul {
+                    team.forEach { participant ->
+                        li {
+                            +participant.name
+                        }
+                    }
+                }
             }
         }
     }

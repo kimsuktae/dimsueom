@@ -46,7 +46,7 @@ object RandomLunch {
         memberList: List<String>,
         randomLunchPartyListHistory: List<List<List<String>>>,
         date: LocalDate = LocalDate.now(),
-        partySize: Int = 1,
+        partySize: Int = 4,
     ): List<MutableList<String>> {
         val sortedMemberList = memberList.sorted().toMutableList()
         val random = Random(date.toEpochDay() + sortedMemberList.sumOf { it.hashCode() })
@@ -54,7 +54,8 @@ object RandomLunch {
         val partyCount = ceil(sortedMemberList.size.toDouble() / partySize.toDouble()).toInt()
         val partyRange = 0.rangeUntil(partyCount)
         val partyList = partyRange.map { mutableListOf<String>() }
-        while (sortedMemberList.size > 0) {
+
+        while (sortedMemberList.isEmpty()) {
             partyRange.forEach { partyIndex ->
                 if (sortedMemberList.isEmpty()) {
                     return@forEach
@@ -93,6 +94,7 @@ object RandomLunch {
         }
         return partyList.onEach { it.sorted() }
     }
+
     fun getMemberToMemberCountMap(randomLunchPartyListHistory: List<List<List<String>>>): MutableMap<String, MutableMap<String, Long>> {
         val memberToMemberCountMap = mutableMapOf<String, MutableMap<String, Long>>()
         randomLunchPartyListHistory.flatten().forEach { party ->
