@@ -7,22 +7,43 @@ import kotlinx.coroutines.withContext
 class MemberService {
     private val members = listOf(
         Member(
-            name = "피카츄", participate = true
+            name = "정승현", participate = false
         ),
         Member(
-            name = "라이츄", participate = true
+            name = "서석교", participate = false
         ),
         Member(
-            name = "파이리", participate = false
+            name = "전세환", participate = false
         ),
         Member(
-            name = "꼬부기", participate = false
+            name = "김영진", participate = false
         ),
         Member(
-            name = "버터플", participate = false
+            name = "박민수", participate = false
         ),
         Member(
-            name = "야도란", participate = false
+            name = "김석태", participate = false
+        ),
+        Member(
+            name = "조진영", participate = false
+        ),
+        Member(
+            name = "정시원", participate = false
+        ),
+        Member(
+            name = "김명훈", participate = false
+        ),
+        Member(
+            name = "박원석", participate = false
+        ),
+        Member(
+            name = "최호양", participate = false
+        ),
+        Member(
+            name = "남동민", participate = false
+        ),
+        Member(
+            name = "장군우", participate = false
         ),
     )
 
